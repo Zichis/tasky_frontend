@@ -1,82 +1,7 @@
 <template>
   <div class="min-h-screen flex">
-    <div
-      class="border-r w-14 bg-gray-800 text-center py-5"
-      @click="hideAll($event)"
-    >
-      <a href="#" class="block text-white mb-20 hover:text-yellow-500">
-        <font-awesome-icon icon="bars" />
-      </a>
-      <a href="#" class="block text-white mb-5 hover:text-yellow-500">
-        <font-awesome-icon icon="list" />
-      </a>
-      <a href="#" class="block text-white mb-5 hover:text-yellow-500">
-        <font-awesome-icon icon="users" />
-      </a>
-      <a href="#" class="block text-white mb-5 hover:text-yellow-500">
-        <font-awesome-icon icon="chart-pie" />
-      </a>
-      <a href="#" class="block text-white mb-5 hover:text-yellow-500">
-        <font-awesome-icon icon="calendar-check" />
-      </a>
-      <a
-        href="#"
-        class="block bg-red-600 text-white py-4 mb-5 hover:text-white"
-      >
-        <font-awesome-icon icon="sign-out-alt" />
-      </a>
-    </div>
-    <div
-      class="hidden lg:block border-r w-64 bg-gray-200"
-      @click="hideAll($event)"
-    >
-      <h2 class="text-center py-5 text-2xl font-semibold text-gray-700">
-        My Tasks
-      </h2>
-      <div>
-        <a href="#" class="flex justify-between items-center px-5 mb-7">
-          <h4>All Tasks</h4>
-          <div
-            class="bg-blue-500 text-white text-sm font-light py-1 px-3 rounded-full"
-          >
-            122
-          </div>
-        </a>
-        <a
-          href="#"
-          class="flex justify-between items-center px-5 mb-7 text-gray-700"
-        >
-          <h4>Management</h4>
-          <div
-            class="bg-red-500 text-white text-sm font-light py-1 px-3 rounded-full"
-          >
-            17
-          </div>
-        </a>
-        <a
-          href="#"
-          class="flex justify-between items-center px-5 mb-7 text-gray-700"
-        >
-          <h4>Sales</h4>
-          <div
-            class="bg-yellow-500 text-white text-sm font-light py-1 px-3 rounded-full"
-          >
-            17
-          </div>
-        </a>
-        <a
-          href="#"
-          class="flex justify-between items-center px-5 mb-7 text-gray-700"
-        >
-          <h4>Operations</h4>
-          <div
-            class="bg-green-500 text-white text-sm font-light py-1 px-3 rounded-full"
-          >
-            17
-          </div>
-        </a>
-      </div>
-    </div>
+    <side-menu-thin></side-menu-thin>
+    <side-menu-large></side-menu-large>
     <div class="flex-1 p-5 bg-gray-100">
       <div class="flex">
         <div class="w-1/3 flex items-center">
@@ -152,34 +77,15 @@
       </div>
       <div class="py-5" @click="hideAll($event)">
         <h2 class="text-5xl text-gray-600">
-          <span class="font-extralight">Welcome back, </span><span>Ezichi</span>
+          <span class="font-extralight">Welcome, </span><span>Ezichi</span>
         </h2>
         <hr class="my-5" />
         <div class="flex flex-wrap">
-          <div class="w-full md:w-1/2 lg:w-1/3 p-5">
-            <div
-              class="relative bg-white p-3 h-44 rounded border-t-4 border-blue-500 shadow-md"
-            >
-              <h3 class="bg-blue-200 text-blue-500 p-2 rounded inline-block">
-                Management
-              </h3>
-              <p class="my-2 text-gray-500">
-                Finalize the sales plan for new product marketing...
-              </p>
-              <div class="absolute bottom-0 py-3 text-gray-400">
-                <font-awesome-icon
-                  icon="comment-alt"
-                  class="text-gray-400"
-                ></font-awesome-icon>
-                4&nbsp;&nbsp;
-                <font-awesome-icon
-                  icon="paperclip"
-                  class="text-gray-400"
-                ></font-awesome-icon>
-                2
-              </div>
-            </div>
-          </div>
+          <task-card
+            v-for="task in tasks"
+            :key="task.id"
+            :task="task"
+          ></task-card>
         </div>
       </div>
     </div>
@@ -188,12 +94,57 @@
 
 <script>
 // @ is an alias to /src
+import SideMenuLarge from "@/components/SideMenuLarge";
+import SideMenuThin from "@/components/SideMenuThin";
+import TaskCard from "@/components/TaskCard";
 
 export default {
   name: "Home",
+  components: { SideMenuLarge, SideMenuThin, TaskCard },
   data() {
     return {
       notificationHidden: true,
+      task: {
+        category: "Management",
+        details: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam et
+        excepturi vitae dolor assumenda, perferendis a modi quod iusto quo
+        repellat repudiandae tenetur commodi dicta doloribus inventore sunt
+        sapiente similique neque at. Maxime aperiam tempora necessitatibus totam
+        molestiae illo quaerat!`,
+        color: "red",
+      },
+      tasks: [
+        {
+          id: 1,
+          category: "Management",
+          details: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam et
+        excepturi vitae dolor assumenda, perferendis a modi quod iusto quo
+        repellat repudiandae tenetur commodi dicta doloribus inventore sunt
+        sapiente similique neque at. Maxime aperiam tempora necessitatibus totam
+        molestiae illo quaerat!`,
+          color: "red",
+        },
+        {
+          id: 2,
+          category: "Sales",
+          details: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam et
+        excepturi vitae dolor assumenda, perferendis a modi quod iusto quo
+        repellat repudiandae tenetur commodi dicta doloribus inventore sunt
+        sapiente similique neque at. Maxime aperiam tempora necessitatibus totam
+        molestiae illo quaerat!`,
+          color: "yellow",
+        },
+        {
+          id: 3,
+          category: "Operations",
+          details: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam et
+        excepturi vitae dolor assumenda, perferendis a modi quod iusto quo
+        repellat repudiandae tenetur commodi dicta doloribus inventore sunt
+        sapiente similique neque at. Maxime aperiam tempora necessitatibus totam
+        molestiae illo quaerat!`,
+          color: "green",
+        },
+      ],
     };
   },
   methods: {
