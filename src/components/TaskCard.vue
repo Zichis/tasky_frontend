@@ -2,13 +2,16 @@
   <div class="w-full md:w-1/2 lg:w-1/3 p-2 md:p-5">
     <div
       class="relative bg-white p-3 h-44 rounded border-t-4"
-      :class="borderColor(task.color)"
+      :class="borderColor(task.task_category.color)"
     >
       <h3
         class="p-2 rounded inline-block text-sm"
-        :class="[categoryTextColor(task.color), categoryBgColor(task.color)]"
+        :class="[
+          categoryTextColor(task.task_category.color),
+          categoryBgColor(task.task_category.color),
+        ]"
       >
-        {{ task.category }}
+        {{ task.task_category.name }}
       </h3>
       <p class="my-2 text-gray-500 h-12 overflow-hidden">
         {{ task.details | brief }}

@@ -1,8 +1,13 @@
 <template>
-  <div class="min-h-screen flex">
-    <side-menu-thin></side-menu-thin>
-    <side-menu-large></side-menu-large>
-    <div class="flex-1 p-5 bg-gray-100">
+  <div class="min-h-screen flex relative">
+    <side-menu-thin @toggleMenu="toggleLargeSideMenu"></side-menu-thin>
+    <side-menu-large
+      class="lg:block"
+      :class="{ hidden: isHidden }"
+    ></side-menu-large>
+    <div
+      class="flex-1 p-5 bg-gray-100 pl-16 lg:pl-80 h-screen overflow-y-scroll"
+    >
       <div class="flex">
         <div class="w-1/3 flex items-center">
           <font-awesome-icon
@@ -29,7 +34,7 @@
               class="bg-red-400 w-2 h-2 rounded-full absolute top-0 right-0"
             ></div>
             <div
-              class="absolute bg-white w-64 z-10 -bottom-56 right-0 rounded p-3 shadow-md"
+              class="absolute bg-white w-64 z-10 -bottom-56 rounded p-3 shadow-md"
               :class="{ hidden: notificationHidden }"
             >
               <h3>Notifications</h3>
@@ -97,6 +102,7 @@
 import SideMenuLarge from "@/components/SideMenuLarge";
 import SideMenuThin from "@/components/SideMenuThin";
 import TaskCard from "@/components/TaskCard";
+import axios from "axios";
 
 export default {
   name: "Home",
@@ -113,38 +119,8 @@ export default {
         molestiae illo quaerat!`,
         color: "red",
       },
-      tasks: [
-        {
-          id: 1,
-          category: "Management",
-          details: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam et
-        excepturi vitae dolor assumenda, perferendis a modi quod iusto quo
-        repellat repudiandae tenetur commodi dicta doloribus inventore sunt
-        sapiente similique neque at. Maxime aperiam tempora necessitatibus totam
-        molestiae illo quaerat!`,
-          color: "red",
-        },
-        {
-          id: 2,
-          category: "Sales",
-          details: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam et
-        excepturi vitae dolor assumenda, perferendis a modi quod iusto quo
-        repellat repudiandae tenetur commodi dicta doloribus inventore sunt
-        sapiente similique neque at. Maxime aperiam tempora necessitatibus totam
-        molestiae illo quaerat!`,
-          color: "yellow",
-        },
-        {
-          id: 3,
-          category: "Operations",
-          details: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam et
-        excepturi vitae dolor assumenda, perferendis a modi quod iusto quo
-        repellat repudiandae tenetur commodi dicta doloribus inventore sunt
-        sapiente similique neque at. Maxime aperiam tempora necessitatibus totam
-        molestiae illo quaerat!`,
-          color: "green",
-        },
-      ],
+      tasks: [],
+      isHidden: true,
     };
   },
   methods: {
@@ -154,6 +130,14 @@ export default {
     hideAll() {
       this.notificationHidden = true;
     },
+    toggleLargeSideMenu() {
+      this.isHidden = !this.isHidden;
+    },
+  },
+  mounted() {
+    axios.get("http://myapi.test/api/tasks").then((response) => {
+      this.tasks = response.data;
+    });
   },
 };
 </script>
