@@ -1,12 +1,12 @@
 <template>
-  <div
-    class="border-r w-14 bg-gray-800 text-center py-5"
-    @click="hideAll($event)"
-  >
-    <a href="#" class="block text-white mb-20 hover:text-yellow-500">
+  <div class="border-r w-14 bg-gray-800 text-center py-5 absolute h-screen">
+    <button
+      class="block lg:hidden rounded border text-white px-2 py-1 my-0 mx-auto hover:bg-white hover:text-gray-800"
+      @click="toggleLargeSideMenu"
+    >
       <font-awesome-icon icon="bars" />
-    </a>
-    <a href="#" class="block text-white mb-5 hover:text-yellow-500">
+    </button>
+    <a href="#" class="block text-white mt-20 mb-5 hover:text-yellow-500">
       <font-awesome-icon icon="list" />
     </a>
     <a href="#" class="block text-white mb-5 hover:text-yellow-500">
@@ -23,3 +23,13 @@
     </a>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    toggleLargeSideMenu() {
+      this.$emit("toggleMenu");
+    },
+  },
+};
+</script>

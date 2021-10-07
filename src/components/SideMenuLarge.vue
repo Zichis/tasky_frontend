@@ -1,6 +1,6 @@
 <template>
   <div
-    class="hidden lg:block border-r w-64 bg-gray-200"
+    class="border-r w-64 bg-gray-200 absolute h-screen left-14 z-10"
     @click="hideAll($event)"
   >
     <h2 class="text-center py-5 text-2xl font-semibold text-gray-700">
