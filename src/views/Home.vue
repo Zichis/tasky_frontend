@@ -69,15 +69,26 @@
               class="bg-red-400 w-2 h-2 rounded-full absolute top-0 right-0"
             ></div>
           </a>
-          <a
-            href="#"
+          <button
+            @click="toggleUserMenu()"
             class="relative flex justify-center items-center w-10 h-10 rounded-full bg-gray-200 shadow-md"
           >
             <font-awesome-icon
               icon="user"
               class="text-gray-400"
             ></font-awesome-icon>
-          </a>
+            <div
+              class="absolute bg-white w-64 z-10 top-12 right-0 rounded p-3 shadow-md"
+              :class="{ hidden: userMenuHidden }"
+            >
+              <a
+                href="#"
+                @click.prevent="logout"
+                class="block py-2 text-left text-gray-500 hover:text-gray-800"
+                >Logout</a
+              >
+            </div>
+          </button>
         </div>
       </div>
       <div class="py-5" @click="hideAll($event)">
@@ -110,6 +121,7 @@ export default {
   data() {
     return {
       notificationHidden: true,
+      userMenuHidden: true,
       task: {
         category: "Management",
         details: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam et
@@ -129,7 +141,12 @@ export default {
   },
   methods: {
     toggleNotification() {
+      this.userMenuHidden = true;
       this.notificationHidden = !this.notificationHidden;
+    },
+    toggleUserMenu() {
+      this.notificationHidden = true;
+      this.userMenuHidden = !this.userMenuHidden;
     },
     hideAll() {
       this.notificationHidden = true;
