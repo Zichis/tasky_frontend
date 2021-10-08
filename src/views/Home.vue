@@ -121,6 +121,10 @@ export default {
       },
       tasks: [],
       isHidden: true,
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + localStorage.getItem("myapp_token"),
+      },
     };
   },
   methods: {
