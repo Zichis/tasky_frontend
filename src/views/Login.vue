@@ -71,5 +71,20 @@ export default {
         );
     },
   },
+  beforeRouteEnter(to, from, next) {
+    axios
+      .get("http://myapi.test/api/user", {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + localStorage.getItem("myapp_token"),
+        },
+      })
+      .then(() => {
+        next("/");
+      })
+      .catch(() => {
+        next();
+      });
+  },
 };
 </script>
