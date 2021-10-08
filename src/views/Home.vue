@@ -34,7 +34,7 @@
               class="bg-red-400 w-2 h-2 rounded-full absolute top-0 right-0"
             ></div>
             <div
-              class="absolute bg-white w-64 z-10 -bottom-56 rounded p-3 shadow-md"
+              class="absolute bg-white w-64 z-10 top-12 rounded p-3 shadow-md"
               :class="{ hidden: notificationHidden }"
             >
               <h3>Notifications</h3>
