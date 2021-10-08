@@ -144,7 +144,7 @@ export default {
       Authorization: "Bearer " + localStorage.getItem("myapp_token"),
     };
     axios
-      .get("http://myapi.test/api/tasks", { headers: headers })
+      .get("http://myapi.test/api/tasks", { headers: this.headers })
       .then((response) => {
         this.tasks = response.data;
       })
