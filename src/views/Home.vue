@@ -135,9 +135,16 @@ export default {
     },
   },
   mounted() {
-    axios.get("http://myapi.test/api/tasks").then((response) => {
-      this.tasks = response.data;
-    });
+    let headers = {
+      Accept: "application/json",
+      Authorization: "Bearer " + localStorage.getItem("myapp_token"),
+    };
+    axios
+      .get("http://myapi.test/api/tasks", { headers: headers })
+      .then((response) => {
+        this.tasks = response.data;
+      })
+      .catch((error) => console.log(error.response.data.message));
   },
 };
 </script>
