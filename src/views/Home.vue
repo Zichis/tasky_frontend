@@ -114,6 +114,7 @@ import SideMenuLarge from "@/components/SideMenuLarge";
 import SideMenuThin from "@/components/SideMenuThin";
 import TaskCard from "@/components/TaskCard";
 import axios from "axios";
+import router from "../router";
 
 export default {
   name: "Home",
@@ -154,12 +155,18 @@ export default {
     toggleLargeSideMenu() {
       this.isHidden = !this.isHidden;
     },
+    logout() {
+      axios
+        .delete("http://myapi.test/api/logout", { headers: this.headers })
+        .then((response) => {
+          if (response.status === 204) {
+            router.push("/login");
+          }
+        })
+        .catch((error) => console.log(error.response.data.message));
+    },
   },
   mounted() {
-    let headers = {
-      Accept: "application/json",
-      Authorization: "Bearer " + localStorage.getItem("myapp_token"),
-    };
     axios
       .get("http://myapi.test/api/tasks", { headers: this.headers })
       .then((response) => {
