@@ -160,7 +160,7 @@ export default {
         .delete("http://myapi.test/api/logout", { headers: this.headers })
         .then((response) => {
           if (response.status === 204) {
-            router.push("/login");
+            router.push({ name: "Login" });
           }
         })
         .catch((error) => console.log(error.response.data.message));
