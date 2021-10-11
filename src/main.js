@@ -17,6 +17,7 @@ import {
   faUser,
   faCommentAlt,
   faPaperclip,
+  faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -32,7 +33,8 @@ library.add(
   faBell,
   faUser,
   faCommentAlt,
-  faPaperclip
+  faPaperclip,
+  faCheckCircle
 );
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
