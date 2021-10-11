@@ -8,8 +8,19 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
     component: Home,
+    children: [
+      {
+        path: "",
+        name: "Tasks",
+        component: () => import("../views/Tasks/Index.vue"),
+      },
+      {
+        path: "create-task",
+        name: "CreateTask",
+        component: () => import("../views/Tasks/Create.vue"),
+      },
+    ],
   },
   {
     path: "/auth/",
