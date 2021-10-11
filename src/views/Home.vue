@@ -91,18 +91,12 @@
           </button>
         </div>
       </div>
-      <div class="py-5" @click="hideAll($event)">
+      <div class="py-5">
         <h2 class="text-5xl text-gray-600">
           <span class="font-extralight">Welcome, </span><span>Ezichi</span>
         </h2>
         <hr class="my-5" />
-        <div class="flex flex-wrap">
-          <task-card
-            v-for="task in tasks"
-            :key="task.id"
-            :task="task"
-          ></task-card>
-        </div>
+        <router-view></router-view>
       </div>
     </div>
   </div>
@@ -112,13 +106,12 @@
 // @ is an alias to /src
 import SideMenuLarge from "@/components/SideMenuLarge";
 import SideMenuThin from "@/components/SideMenuThin";
-import TaskCard from "@/components/TaskCard";
 import axios from "axios";
 import router from "../router";
 
 export default {
   name: "Home",
-  components: { SideMenuLarge, SideMenuThin, TaskCard },
+  components: { SideMenuLarge, SideMenuThin },
   data() {
     return {
       notificationHidden: true,
@@ -132,7 +125,6 @@ export default {
         molestiae illo quaerat!`,
         color: "red",
       },
-      tasks: [],
       isHidden: true,
       headers: {
         Accept: "application/json",
@@ -149,9 +141,6 @@ export default {
       this.notificationHidden = true;
       this.userMenuHidden = !this.userMenuHidden;
     },
-    hideAll() {
-      this.notificationHidden = true;
-    },
     toggleLargeSideMenu() {
       this.isHidden = !this.isHidden;
     },
@@ -165,14 +154,6 @@ export default {
         })
         .catch((error) => console.log(error.response.data.message));
     },
-  },
-  mounted() {
-    axios
-      .get("http://myapi.test/api/tasks", { headers: this.headers })
-      .then((response) => {
-        this.tasks = response.data;
-      })
-      .catch((error) => console.log(error.response.data.message));
   },
   beforeRouteEnter(to, from, next) {
     axios
