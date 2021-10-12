@@ -167,7 +167,7 @@ export default {
         next();
       })
       .catch(() => {
-        next("/login");
+        next({ name: "Login" });
       });
   },
 };
