@@ -93,7 +93,8 @@
       </div>
       <div class="py-5">
         <h2 class="text-5xl text-gray-600">
-          <span class="font-extralight">Welcome, </span><span>Ezichi</span>
+          <span class="font-extralight">Welcome</span
+          ><span v-if="user !== {}">, {{ user.name }}</span>
         </h2>
         <hr class="my-5" />
         <router-view></router-view>
@@ -114,6 +115,7 @@ export default {
   components: { SideMenuLarge, SideMenuThin },
   data() {
     return {
+      user: {},
       notificationHidden: true,
       userMenuHidden: true,
       task: {
@@ -154,6 +156,14 @@ export default {
         })
         .catch((error) => console.log(error.response.data.message));
     },
+  },
+  mounted() {
+    axios
+      .get("http://myapi.test/api/user", { headers: this.headers })
+      .then((response) => {
+        this.user = response.data;
+      })
+      .catch((error) => console.log(error.response));
   },
   beforeRouteEnter(to, from, next) {
     axios
