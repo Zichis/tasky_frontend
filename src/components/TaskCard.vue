@@ -4,17 +4,27 @@
       class="relative bg-white p-3 h-44 rounded border-t-4"
       :class="borderColor(task.task_category.color)"
     >
-      <h3
-        class="p-2 rounded inline-block text-sm"
-        :class="[
-          categoryTextColor(task.task_category.color),
-          categoryBgColor(task.task_category.color),
-        ]"
-      >
-        {{ task.task_category.name }}
-      </h3>
+      <div class="flex justify-between items-center">
+        <h3
+          class="p-2 rounded inline-block text-sm"
+          :class="[
+            categoryTextColor(task.task_category.color),
+            categoryBgColor(task.task_category.color),
+          ]"
+        >
+          {{ task.task_category.name }}
+        </h3>
+        <div>
+          <router-link
+            :to="{ name: 'EditTask', params: { id: task.id } }"
+            class="text-gray-400 hover:text-blue-400"
+          >
+            <font-awesome-icon icon="edit"></font-awesome-icon>
+          </router-link>
+        </div>
+      </div>
       <p class="my-2 text-gray-500 h-12 overflow-hidden">
-        {{ task.details | brief }}
+        {{ task.title | brief }}
       </p>
       <div class="absolute bottom-0 py-3 text-gray-400">
         <font-awesome-icon
