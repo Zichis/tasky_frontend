@@ -18,6 +18,7 @@ import {
   faCommentAlt,
   faPaperclip,
   faCheckCircle,
+  faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import vSelect from "vue-select";
@@ -38,7 +39,8 @@ library.add(
   faUser,
   faCommentAlt,
   faPaperclip,
-  faCheckCircle
+  faCheckCircle,
+  faEdit
 );
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.component("v-select", vSelect);
