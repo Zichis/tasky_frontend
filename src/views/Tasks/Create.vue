@@ -17,7 +17,6 @@
       <div class="mb-5">
         <label for="category" class="block mb-2">Category</label>
         <v-select
-          @change="categoryChange"
           label="name"
           :options="categories"
           taggable
@@ -146,9 +145,6 @@ export default {
         .catch((error) => {
           console.log(error.response);
         });
-    },
-    categoryChange() {
-      console.log(this.task.category);
     },
   },
   mounted() {
