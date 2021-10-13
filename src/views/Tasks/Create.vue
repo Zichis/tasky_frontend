@@ -124,6 +124,7 @@ export default {
           },
         })
         .then(() => {
+          localStorage.setItem("tasky_alert_message", "New task added!");
           router.push({ name: "Tasks" });
         })
         .catch((error) => {

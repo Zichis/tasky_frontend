@@ -26,6 +26,13 @@ export default {
         this.tasks = response.data;
       })
       .catch((error) => console.log(error.response.data.message));
+
+    let alerttMessage = localStorage.getItem("tasky_alert_message");
+
+    if (alerttMessage !== null) {
+      this.$swal(alerttMessage);
+      localStorage.removeItem("tasky_alert_message");
+    }
   },
 };
 </script>
