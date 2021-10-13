@@ -1,0 +1,126 @@
+<template>
+  <div class="w-full md:w-1/2 lg:w-1/3">
+    <h2 class="text-3xl mb-5 font-light text-gray-700">Edit task</h2>
+    <form @submit.prevent="editTask">
+      <div class="mb-5">
+        <label for="title" class="block mb-2">Title</label>
+        <input
+          class="px-2 py-1 w-full border-2 border-gray-300 rounded focus:outline-none focus:border-gray-400"
+          type="text"
+          v-model="task.title"
+          placeholder="Enter task title"
+        />
+        <p v-if="validationErrors.title" class="my-1 text-red-400 font-light">
+          {{ validationErrors.title[0] }}
+        </p>
+      </div>
+      <div class="mb-5">
+        <label for="category" class="block mb-2">Category</label>
+        <v-select
+          label="name"
+          :options="categories"
+          v-model="task.task_category"
+        ></v-select>
+        <p
+          v-if="validationErrors.category"
+          class="my-1 text-red-400 font-light"
+        >
+          {{ validationErrors.category[0] }}
+        </p>
+      </div>
+      <div class="mb-5">
+        <label for="details" class="block mb-2">Details</label>
+        <textarea
+          class="px-2 py-1 w-full border-2 border-gray-300 rounded focus:outline-none focus:border-gray-400 resize-none"
+          rows="6"
+          v-model="task.details"
+        ></textarea>
+        <p v-if="validationErrors.details" class="my-1 text-red-400 font-light">
+          {{ validationErrors.details[0] }}
+        </p>
+      </div>
+      <button
+        class="bg-blue-400 font-light px-3 py-1 mb-2 rounded text-blue-100 hover:text-white hover:bg-blue-500"
+        type="submit"
+      >
+        Update
+      </button>
+    </form>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+import router from "../../router";
+
+export default {
+  data() {
+    return {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + localStorage.getItem("myapp_token"),
+      },
+      task: {
+        title: "",
+        task_category: {
+          name: "",
+        },
+        details: "",
+        color: "",
+      },
+      categories: [],
+      validationErrors: [],
+    };
+  },
+  methods: {
+    getCategories() {
+      axios
+        .get("http://myapi.test/api/task-categories", {
+          headers: {
+            Accept: "application/json",
+            Authorization: "Bearer " + localStorage.getItem("myapp_token"),
+          },
+        })
+        .then((response) => {
+          this.categories = response.data;
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    },
+    editTask() {
+      console.log(this.task);
+      axios
+        .put(
+          `http://myapi.test/api/tasks/${this.$route.params.id}`,
+          this.task,
+          {
+            headers: {
+              Accept: "application/json",
+              Authorization: "Bearer " + localStorage.getItem("myapp_token"),
+            },
+          }
+        )
+        .then(() => {
+          localStorage.setItem("tasky_alert_message", "Task updated!");
+          router.push({ name: "Tasks" });
+        })
+        .catch((error) => {
+          this.validationErrors = error.response.data.errors;
+        });
+    },
+  },
+  mounted() {
+    this.getCategories();
+    axios
+      .get(`http://myapi.test/api/tasks/${this.$route.params.id}`, {
+        headers: this.headers,
+      })
+      .then((response) => {
+        console.log(response.data);
+        this.task = response.data;
+      })
+      .catch((error) => console.log(error.response));
+  },
+};
+</script>
