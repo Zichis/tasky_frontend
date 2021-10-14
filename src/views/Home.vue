@@ -1,6 +1,9 @@
 <template>
   <div class="min-h-screen flex relative">
-    <side-menu-thin @toggleMenu="toggleLargeSideMenu"></side-menu-thin>
+    <side-menu-thin
+      @toggleMenu="toggleLargeSideMenu"
+      @logout="logout"
+    ></side-menu-thin>
     <side-menu-large
       class="lg:block"
       :class="{ hidden: isHidden }"
