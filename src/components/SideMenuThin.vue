@@ -6,9 +6,12 @@
     >
       <font-awesome-icon icon="bars" />
     </button>
-    <a href="#" class="block text-white mt-20 mb-5 hover:text-yellow-500">
+    <router-link
+      :to="{ name: 'Tasks' }"
+      class="block text-white mt-20 mb-5 hover:text-yellow-500"
+    >
       <font-awesome-icon icon="list" />
-    </a>
+    </router-link>
     <a href="#" class="block text-white mb-5 hover:text-yellow-500">
       <font-awesome-icon icon="users" />
     </a>
@@ -18,7 +21,11 @@
     <a href="#" class="block text-white mb-5 hover:text-yellow-500">
       <font-awesome-icon icon="calendar-check" />
     </a>
-    <a href="#" class="block bg-red-600 text-white py-4 mb-5 hover:text-white">
+    <a
+      href="#"
+      @click.prevent="logout()"
+      class="block bg-red-600 text-white py-4 mb-5 hover:text-white"
+    >
       <font-awesome-icon icon="sign-out-alt" />
     </a>
   </div>
@@ -29,6 +36,9 @@ export default {
   methods: {
     toggleLargeSideMenu() {
       this.$emit("toggleMenu");
+    },
+    logout() {
+      this.$emit("logout");
     },
   },
 };
