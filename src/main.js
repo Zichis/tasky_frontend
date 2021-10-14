@@ -20,6 +20,7 @@ import {
   faCheckCircle,
   faEdit,
   faTrashAlt,
+  faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import vSelect from "vue-select";
@@ -42,7 +43,8 @@ library.add(
   faPaperclip,
   faCheckCircle,
   faEdit,
-  faTrashAlt
+  faTrashAlt,
+  faChevronLeft
 );
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.component("v-select", vSelect);
