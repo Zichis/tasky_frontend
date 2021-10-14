@@ -52,6 +52,7 @@
 <script>
 import axios from "axios";
 import router from "../../router";
+import SetAlert from "../../functions/SetAlert";
 
 export default {
   data() {
@@ -102,7 +103,7 @@ export default {
           }
         )
         .then(() => {
-          localStorage.setItem("tasky_alert_message", "Task updated!");
+          SetAlert("Updated", "Your task has been updated!", "success");
           router.push({ name: "Tasks" });
         })
         .catch((error) => {

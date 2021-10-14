@@ -7,6 +7,8 @@
 <script>
 import TaskCard from "@/components/TaskCard";
 import axios from "axios";
+import GetAlert from "../../functions/GetAlert";
+import DeleteAlert from "../../functions/DeleteAlert";
 
 export default {
   components: { TaskCard },
@@ -27,11 +29,11 @@ export default {
       })
       .catch((error) => console.log(error.response.data.message));
 
-    let alerttMessage = localStorage.getItem("tasky_alert_message");
+    let [alertAction, alertMessage, alertStatus] = GetAlert();
 
-    if (alerttMessage !== null) {
-      this.$swal(alerttMessage);
-      localStorage.removeItem("tasky_alert_message");
+    if (alertMessage !== null) {
+      this.$swal(alertAction, alertMessage, alertStatus);
+      DeleteAlert();
     }
   },
 };
