@@ -42,7 +42,12 @@
           icon="paperclip"
           class="text-gray-400"
         ></font-awesome-icon>
-        2
+        2&nbsp;
+        <router-link
+          :to="{ name: 'ShowTask', params: { id: task.id } }"
+          class="my-1 hover:text-gray-700"
+          >View</router-link
+        >
       </div>
     </div>
   </div>
