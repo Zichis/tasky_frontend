@@ -115,7 +115,6 @@ export default {
   },
   methods: {
     createTask() {
-      console.log(this.task);
       axios
         .post("http://myapi.test/api/tasks", this.task, {
           headers: {
@@ -129,7 +128,6 @@ export default {
         })
         .catch((error) => {
           this.validationErrors = error.response.data.errors;
-          console.log(error.response);
         });
     },
     getCategories() {

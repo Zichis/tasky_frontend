@@ -74,7 +74,6 @@ export default {
       return `text-${color}-500`;
     },
     deleteConfirm(id) {
-      console.log("We're here! " + id);
       this.$emit("deleteConfirm", id);
     },
   },

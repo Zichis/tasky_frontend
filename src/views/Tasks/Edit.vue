@@ -90,7 +90,6 @@ export default {
         });
     },
     editTask() {
-      console.log(this.task);
       axios
         .put(
           `http://myapi.test/api/tasks/${this.$route.params.id}`,
@@ -118,7 +117,6 @@ export default {
         headers: this.headers,
       })
       .then((response) => {
-        console.log(response.data);
         this.task = response.data;
       })
       .catch((error) => console.log(error.response));
