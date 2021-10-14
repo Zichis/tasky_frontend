@@ -128,7 +128,11 @@ export default {
       .then((response) => {
         this.task = response.data;
       })
-      .catch((error) => console.log(error.response));
+      .catch((error) => {
+        if (error.response.status === 403) {
+          router.go(-1);
+        }
+      });
   },
 };
 </script>
