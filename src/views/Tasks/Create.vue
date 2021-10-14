@@ -1,5 +1,11 @@
 <template>
   <div class="w-full md:w-1/2 lg:w-1/3">
+    <button
+      @click="hasHistory() ? $router.go(-1) : $router.push('/')"
+      class="mb-4 font-light text-gray-500 hover:text-gray-700"
+    >
+      <font-awesome-icon icon="chevron-left" /> Go back
+    </button>
     <h2 class="text-3xl mb-5 font-light text-gray-700">Add new task</h2>
     <form @submit.prevent="createTask">
       <div class="mb-5">
@@ -144,6 +150,9 @@ export default {
         .catch((error) => {
           console.log(error.response);
         });
+    },
+    hasHistory() {
+      return window.history.length > 2;
     },
   },
   mounted() {
