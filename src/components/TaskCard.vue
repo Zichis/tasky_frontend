@@ -17,10 +17,16 @@
         <div>
           <router-link
             :to="{ name: 'EditTask', params: { id: task.id } }"
-            class="text-gray-400 hover:text-blue-400"
+            class="text-gray-400 hover:text-blue-400 mr-2"
           >
             <font-awesome-icon icon="edit"></font-awesome-icon>
           </router-link>
+          <button
+            @click="deleteConfirm(task.id)"
+            class="text-gray-400 hover:text-red-400"
+          >
+            <font-awesome-icon icon="trash-alt"></font-awesome-icon>
+          </button>
         </div>
       </div>
       <p class="my-2 text-gray-500 h-12 overflow-hidden">
@@ -66,6 +72,10 @@ export default {
     },
     categoryTextColor(color) {
       return `text-${color}-500`;
+    },
+    deleteConfirm(id) {
+      console.log("We're here! " + id);
+      this.$emit("deleteConfirm", id);
     },
   },
 };
