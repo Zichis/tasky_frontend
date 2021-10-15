@@ -4,10 +4,6 @@
       @toggleMenu="toggleLargeSideMenu"
       @logout="logout"
     ></side-menu-thin>
-    <side-menu-large
-      class="lg:block"
-      :class="{ hidden: isHidden }"
-    ></side-menu-large>
     <div
       class="flex-1 p-5 bg-gray-100 pl-16 lg:pl-80 h-screen overflow-y-scroll"
     >
@@ -108,14 +104,13 @@
 
 <script>
 // @ is an alias to /src
-import SideMenuLarge from "@/components/SideMenuLarge";
 import SideMenuThin from "@/components/SideMenuThin";
 import axios from "axios";
 import router from "../router";
 
 export default {
   name: "Home",
-  components: { SideMenuLarge, SideMenuThin },
+  components: { SideMenuThin },
   data() {
     return {
       user: {},
