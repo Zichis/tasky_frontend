@@ -55,42 +55,23 @@
           >
             <h4>All Tasks</h4>
             <div
-              class="bg-blue-500 text-white text-xs font-light py-1 px-2 rounded-full"
+              class="bg-blue-500 text-white text-xs font-light py-1 px-3 rounded-full"
             >
-              99+
+              {{ tasks.length }}
             </div>
           </router-link>
           <a
+            v-for="category in categories"
+            :key="category.id"
             href="#"
             class="flex justify-between items-center px-5 mb-7 text-gray-700"
           >
-            <h4>Management</h4>
+            <h4>{{ category.name }}</h4>
             <div
-              class="bg-red-500 text-white text-xs font-light py-1 px-2 rounded-full"
+              class="text-white text-xs font-light py-1 px-3 rounded-full"
+              :class="badgeColor(category.color)"
             >
-              17
-            </div>
-          </a>
-          <a
-            href="#"
-            class="flex justify-between items-center px-5 mb-7 text-gray-700"
-          >
-            <h4>Sales</h4>
-            <div
-              class="bg-yellow-500 text-white text-xs font-light py-1 px-2 rounded-full"
-            >
-              17
-            </div>
-          </a>
-          <a
-            href="#"
-            class="flex justify-between items-center px-5 mb-7 text-gray-700"
-          >
-            <h4>Operations</h4>
-            <div
-              class="bg-green-500 text-white text-xs font-light py-1 px-2 rounded-full"
-            >
-              17
+              {{ category.tasks.length }}
             </div>
           </a>
         </div>
@@ -100,10 +81,18 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
+      categories: [],
+      tasks: [],
       sidemenuOpen: false,
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + localStorage.getItem("myapp_token"),
+      },
     };
   },
   methods: {
@@ -114,11 +103,30 @@ export default {
     logout() {
       this.$emit("logout");
     },
+    badgeColor(color) {
+      return `bg-${color}-500`;
+    },
   },
   computed: {
     sidemenuWidth() {
       return this.sidemenuOpen ? "w-80 lg:w-72" : "w-14 lg:w-72";
     },
+  },
+  mounted() {
+    axios
+      .get("http://myapi.test/api/task-categories", { headers: this.headers })
+      .then((response) => {
+        console.log(response.data);
+        this.categories = response.data;
+      })
+      .catch((error) => console.log(error.response));
+
+    axios
+      .get("http://myapi.test/api/tasks", { headers: this.headers })
+      .then((response) => {
+        this.tasks = response.data;
+      })
+      .catch((error) => console.log(error.response));
   },
 };
 </script>
