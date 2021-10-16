@@ -58,7 +58,7 @@ export default {
   },
   mounted() {
     axios
-      .get(`http://myapi.test/api/tasks/${this.$route.params.id}`, {
+      .get(process.env.VUE_APP_API_URL + `tasks/${this.$route.params.id}`, {
         headers: this.headers,
       })
       .then((response) => {

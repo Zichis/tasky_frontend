@@ -88,7 +88,7 @@ export default {
         Accept: "application/json",
       };
       axios
-        .post("http://myapi.test/api/login", this.loginForm, headers)
+        .post(process.env.VUE_APP_API_URL + "login", this.loginForm, headers)
         .then((response) => {
           localStorage.setItem("myapp_token", response.data.token);
           router.push("/");
@@ -100,7 +100,7 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     axios
-      .get("http://myapi.test/api/user", {
+      .get(process.env.VUE_APP_API_URL + "user", {
         headers: {
           Accept: "application/json",
           Authorization: "Bearer " + localStorage.getItem("myapp_token"),

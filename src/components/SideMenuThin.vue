@@ -114,7 +114,9 @@ export default {
   },
   mounted() {
     axios
-      .get("http://myapi.test/api/task-categories", { headers: this.headers })
+      .get(process.env.VUE_APP_API_URL + "task-categories", {
+        headers: this.headers,
+      })
       .then((response) => {
         console.log(response.data);
         this.categories = response.data;
@@ -122,7 +124,7 @@ export default {
       .catch((error) => console.log(error.response));
 
     axios
-      .get("http://myapi.test/api/tasks", { headers: this.headers })
+      .get(process.env.VUE_APP_API_URL + "tasks", { headers: this.headers })
       .then((response) => {
         this.tasks = response.data;
       })

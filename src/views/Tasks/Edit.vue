@@ -82,7 +82,7 @@ export default {
   methods: {
     getCategories() {
       axios
-        .get("http://myapi.test/api/task-categories", {
+        .get(process.env.VUE_APP_API_URL + "task-categories", {
           headers: {
             Accept: "application/json",
             Authorization: "Bearer " + localStorage.getItem("myapp_token"),
@@ -98,7 +98,7 @@ export default {
     editTask() {
       axios
         .put(
-          `http://myapi.test/api/tasks/${this.$route.params.id}`,
+          process.env.VUE_APP_API_URL + `tasks/${this.$route.params.id}`,
           this.task,
           {
             headers: {
@@ -122,7 +122,7 @@ export default {
   mounted() {
     this.getCategories();
     axios
-      .get(`http://myapi.test/api/tasks/${this.$route.params.id}`, {
+      .get(process.env.VUE_APP_API_URL + `tasks/${this.$route.params.id}`, {
         headers: this.headers,
       })
       .then((response) => {

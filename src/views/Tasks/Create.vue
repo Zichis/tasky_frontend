@@ -122,7 +122,7 @@ export default {
   methods: {
     createTask() {
       axios
-        .post("http://myapi.test/api/tasks", this.task, {
+        .post(process.env.VUE_APP_API_URL + "tasks", this.task, {
           headers: {
             Accept: "application/json",
             Authorization: "Bearer " + localStorage.getItem("myapp_token"),
@@ -138,7 +138,7 @@ export default {
     },
     getCategories() {
       axios
-        .get("http://myapi.test/api/task-categories", {
+        .get(process.env.VUE_APP_API_URL + "task-categories", {
           headers: {
             Accept: "application/json",
             Authorization: "Bearer " + localStorage.getItem("myapp_token"),

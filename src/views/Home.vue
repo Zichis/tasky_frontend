@@ -146,7 +146,9 @@ export default {
     },
     logout() {
       axios
-        .delete("http://myapi.test/api/logout", { headers: this.headers })
+        .delete(process.env.VUE_APP_API_URL + "logout", {
+          headers: this.headers,
+        })
         .then((response) => {
           if (response.status === 204) {
             router.push({ name: "Login" });
@@ -157,15 +159,17 @@ export default {
   },
   mounted() {
     axios
-      .get("http://myapi.test/api/user", { headers: this.headers })
+      .get(process.env.VUE_APP_API_URL + "user", { headers: this.headers })
       .then((response) => {
         this.user = response.data;
       })
       .catch((error) => console.log(error.response));
+
+    console.log(process.env.VUE_APP_API_URL);
   },
   beforeRouteEnter(to, from, next) {
     axios
-      .get("http://myapi.test/api/user", {
+      .get(process.env.VUE_APP_API_URL + "user", {
         headers: {
           Accept: "application/json",
           Authorization: "Bearer " + localStorage.getItem("myapp_token"),

@@ -42,7 +42,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://myapi.test/api/tasks", { headers: this.headers })
+      .get(process.env.VUE_APP_API_URL + "tasks", { headers: this.headers })
       .then((response) => {
         this.tasks = response.data;
         if (this.tasks.length < 1) {
@@ -64,7 +64,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`http://myapi.test/api/tasks/${id}`, {
+            .delete(process.env.VUE_APP_API_URL + `tasks/${id}`, {
               headers: this.headers,
             })
             .then((response) => {
