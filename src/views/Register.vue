@@ -109,6 +109,9 @@ import axios from "axios";
 import router from "../router";
 
 export default {
+  metaInfo: {
+    title: "Tasky | Sign Up",
+  },
   data() {
     return {
       registerErrorMessage: null,

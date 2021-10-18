@@ -110,6 +110,9 @@ import router from "../router";
 
 export default {
   name: "Home",
+  metaInfo: {
+    title: "Tasky",
+  },
   components: { SideMenuThin },
   data() {
     return {

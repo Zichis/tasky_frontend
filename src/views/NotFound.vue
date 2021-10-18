@@ -17,6 +17,9 @@
 import router from "../router";
 
 export default {
+  metaInfo: {
+    title: "Tasky | Not Found",
+  },
   methods: {
     goBack() {
       if (window.history.length >= 2) {

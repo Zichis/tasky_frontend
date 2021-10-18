@@ -67,6 +67,9 @@ import axios from "axios";
 import router from "../router";
 
 export default {
+  metaInfo: {
+    title: "Tasky | Login",
+  },
   data() {
     return {
       loginForm: {
