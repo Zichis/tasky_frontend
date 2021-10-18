@@ -29,6 +29,12 @@
               placeholder="Enter name"
               autofocus
             />
+            <p
+              v-if="registerFormErrors.name"
+              class="my-1 text-red-400 font-light"
+            >
+              {{ registerFormErrors.name[0] }}
+            </p>
           </div>
           <div class="w-full lg:w-1/2 px-5 mb-5">
             <label for="email" class="block mb-2 text-gray-500">Email</label>
@@ -39,6 +45,12 @@
               v-model="registerForm.email"
               placeholder="Enter email"
             />
+            <p
+              v-if="registerFormErrors.email"
+              class="my-1 text-red-400 font-light"
+            >
+              {{ registerFormErrors.email[0] }}
+            </p>
           </div>
         </div>
         <div class="flex flex-wrap">
@@ -53,6 +65,12 @@
               v-model="registerForm.password"
               placeholder="Enter password"
             />
+            <p
+              v-if="registerFormErrors.password"
+              class="my-1 text-red-400 font-light"
+            >
+              {{ registerFormErrors.password[0] }}
+            </p>
           </div>
           <div class="w-full lg:w-1/2 px-5 mb-5">
             <label for="password_confirmation" class="block mb-2 text-gray-500"
@@ -94,6 +112,7 @@ export default {
   data() {
     return {
       registerErrorMessage: null,
+      registerFormErrors: [],
       registerForm: {
         name: "",
         email: "",
@@ -128,9 +147,10 @@ export default {
           localStorage.setItem("myapp_token", response.data.token);
           router.push("/");
         })
-        .catch(
-          (error) => (this.registerErrorMessage = error.response.data.message)
-        );
+        .catch((error) => {
+          this.registerErrorMessage = error.response.data.message;
+          this.registerFormErrors = error.response.data.errors;
+        });
     },
   },
   beforeRouteEnter(to, from, next) {
