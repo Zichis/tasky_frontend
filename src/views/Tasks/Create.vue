@@ -26,7 +26,7 @@
           label="name"
           :options="categories"
           taggable
-          v-model="task.category"
+          v-model="task.category.name"
         ></v-select>
         <p
           v-if="validationErrors.category"
@@ -111,7 +111,7 @@ export default {
     return {
       task: {
         title: "",
-        category: "",
+        category: { name: null },
         details: "",
         color: "",
       },
@@ -138,7 +138,7 @@ export default {
     },
     getCategories() {
       axios
-        .get(process.env.VUE_APP_API_URL + "task-categories", {
+        .get(process.env.VUE_APP_API_URL + "task-categories/names", {
           headers: {
             Accept: "application/json",
             Authorization: "Bearer " + localStorage.getItem("myapp_token"),
