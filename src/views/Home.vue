@@ -149,9 +149,13 @@ export default {
     },
     logout() {
       axios
-        .delete(process.env.VUE_APP_API_URL + "logout", {
-          headers: this.headers,
-        })
+        .post(
+          process.env.VUE_APP_API_URL + "logout",
+          {},
+          {
+            headers: this.headers,
+          }
+        )
         .then((response) => {
           if (response.status === 204) {
             router.push({ name: "Login" });
