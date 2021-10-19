@@ -81,13 +81,10 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
+  props: ["categories", "tasks"],
   data() {
     return {
-      categories: [],
-      tasks: [],
       sidemenuOpen: false,
       headers: {
         Accept: "application/json",
@@ -111,24 +108,6 @@ export default {
     sidemenuWidth() {
       return this.sidemenuOpen ? "w-80 lg:w-72" : "w-14 lg:w-72";
     },
-  },
-  mounted() {
-    axios
-      .get(process.env.VUE_APP_API_URL + "task-categories", {
-        headers: this.headers,
-      })
-      .then((response) => {
-        console.log(response.data);
-        this.categories = response.data;
-      })
-      .catch((error) => console.log(error.response));
-
-    axios
-      .get(process.env.VUE_APP_API_URL + "tasks", { headers: this.headers })
-      .then((response) => {
-        this.tasks = response.data;
-      })
-      .catch((error) => console.log(error.response));
   },
 };
 </script>
