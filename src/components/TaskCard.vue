@@ -70,13 +70,13 @@ export default {
   props: ["task"],
   methods: {
     borderColor(color) {
-      return `border-${color}-500`;
+      return `custom-border-${color}-500`;
     },
     categoryBgColor(color) {
-      return `bg-${color}-100`;
+      return `custom-bg-${color}-100`;
     },
     categoryTextColor(color) {
-      return `text-${color}-500`;
+      return `custom-text-${color}-500`;
     },
     deleteConfirm(id) {
       this.$emit("deleteConfirm", id);
@@ -84,3 +84,64 @@ export default {
   },
 };
 </script>
+
+<style>
+:root {
+  --red-500: rgba(239, 68, 68, 1);
+  --red-100: rgba(254, 226, 226, 1);
+  --blue-500: rgba(59, 130, 246, 1);
+  --blue-100: rgba(219, 234, 254, 1);
+  --yellow-500: rgba(245, 158, 11, 1);
+  --yellow-100: rgba(254, 243, 199, 1);
+  --green-500: rgba(16, 185, 129, 1);
+  --green-100: rgba(209, 250, 229, 1);
+}
+
+.custom-bg-red-100 {
+  background: var(--red-100);
+}
+
+.custom-border-red-500 {
+  border-color: var(--red-500);
+}
+
+.custom-text-red-500 {
+  color: var(--red-500);
+}
+
+.custom-bg-blue-100 {
+  background: var(--blue-100);
+}
+
+.custom-border-blue-500 {
+  border-color: var(--blue-500);
+}
+
+.custom-text-blue-500 {
+  color: var(--blue-500);
+}
+
+.custom-bg-yellow-100 {
+  background: var(--yellow-100);
+}
+
+.custom-border-yellow-500 {
+  border-color: var(--yellow-500);
+}
+
+.custom-text-yellow-500 {
+  color: var(--yellow-500);
+}
+
+.custom-bg-green-100 {
+  background: var(--green-100);
+}
+
+.custom-border-green-500 {
+  border-color: var(--green-500);
+}
+
+.custom-text-green-500 {
+  color: var(--green-500);
+}
+</style>
