@@ -92,8 +92,8 @@
       </div>
       <div class="py-5">
         <h2 class="text-5xl text-gray-600">
-          <span class="font-extralight">Welcome</span
-          ><span v-if="user !== {}">, {{ user.name }}</span>
+          <span class="font-extralight">Welcome, </span
+          ><span v-if="user !== {}">{{ user.name }}</span>
         </h2>
         <hr class="my-5" />
         <router-view></router-view>
