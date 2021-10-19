@@ -3,6 +3,8 @@
     <side-menu-thin
       @toggleMenu="toggleLargeSideMenu"
       @logout="logout"
+      :categories="categories"
+      :tasks="tasks"
     ></side-menu-thin>
     <div
       class="flex-1 p-5 bg-gray-100 pl-16 lg:pl-80 h-screen overflow-y-scroll"
@@ -96,7 +98,7 @@
           ><span v-if="user !== {}">{{ user.name }}</span>
         </h2>
         <hr class="my-5" />
-        <router-view></router-view>
+        <router-view @updateData="updateData"></router-view>
       </div>
     </div>
   </div>
@@ -133,6 +135,8 @@ export default {
         Accept: "application/json",
         Authorization: "Bearer " + localStorage.getItem("myapp_token"),
       },
+      categories: [],
+      tasks: [],
     };
   },
   methods: {
@@ -146,6 +150,28 @@ export default {
     },
     toggleLargeSideMenu() {
       this.isHidden = !this.isHidden;
+    },
+    getCategories() {
+      axios
+        .get(process.env.VUE_APP_API_URL + "task-categories", {
+          headers: this.headers,
+        })
+        .then((response) => {
+          this.categories = response.data;
+        })
+        .catch((error) => console.log(error.response));
+    },
+    getTasks() {
+      axios
+        .get(process.env.VUE_APP_API_URL + "tasks", { headers: this.headers })
+        .then((response) => {
+          this.tasks = response.data;
+        })
+        .catch((error) => console.log(error.response));
+    },
+    updateData() {
+      this.getCategories();
+      this.getTasks();
     },
     logout() {
       axios
@@ -173,6 +199,7 @@ export default {
       .catch((error) => console.log(error.response));
 
     console.log(process.env.VUE_APP_API_URL);
+    this.updateData();
   },
   beforeRouteEnter(to, from, next) {
     axios
