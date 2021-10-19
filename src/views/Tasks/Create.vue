@@ -130,6 +130,7 @@ export default {
         })
         .then(() => {
           SetAlert("Saved", "You have added a new task!", "success");
+          this.$emit("updateData");
           router.push({ name: "Tasks" });
         })
         .catch((error) => {
