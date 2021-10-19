@@ -71,6 +71,7 @@ export default {
               this.tasks = response.data;
               SetAlert("Deleted", "Your task has been deleted!", "success");
               DisplayAlert(this.$swal);
+              this.$emit("updateData");
               if (this.tasks.length < 1) {
                 this.noTasks = true;
               }
