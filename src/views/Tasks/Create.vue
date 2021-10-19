@@ -161,8 +161,8 @@ export default {
   computed: {
     newCategory() {
       if (
-        this.categories.includes(this.task.category) ||
-        this.task.category === ""
+        this.categories.includes(this.task.category.name) ||
+        this.task.category.name === null
       ) {
         return false;
       }
