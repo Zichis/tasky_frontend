@@ -76,7 +76,6 @@ export default {
         details: "",
         color: "",
       },
-      //categories: [],
       validationErrors: [],
     };
   },

@@ -153,7 +153,6 @@ export default {
           headers: this.headers,
         })
         .then((response) => {
-          // this.categories = response.data;
           this.$store.dispatch("categories", response.data);
         })
         .catch((error) => console.log(error.response));
@@ -162,7 +161,6 @@ export default {
       axios
         .get(process.env.VUE_APP_API_URL + "tasks", { headers: this.headers })
         .then((response) => {
-          // this.tasks = response.data;
           this.$store.dispatch("tasks", response.data);
         })
         .catch((error) => console.log(error.response));
@@ -194,7 +192,6 @@ export default {
     axios
       .get(process.env.VUE_APP_API_URL + "user", { headers: this.headers })
       .then((response) => {
-        // this.user = response.data;
         this.$store.dispatch("user", response.data);
       })
       .catch((error) => console.log(error.response));

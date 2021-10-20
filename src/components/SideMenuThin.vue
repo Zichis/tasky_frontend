@@ -95,7 +95,6 @@ export default {
   },
   methods: {
     toggleLargeSideMenu() {
-      //this.$emit("toggleMenu");
       this.sidemenuOpen = !this.sidemenuOpen;
     },
     logout() {
