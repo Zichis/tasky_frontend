@@ -81,8 +81,9 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  props: ["categories", "tasks"],
   data() {
     return {
       sidemenuOpen: false,
@@ -108,6 +109,7 @@ export default {
     sidemenuWidth() {
       return this.sidemenuOpen ? "w-80 lg:w-72" : "w-14 lg:w-72";
     },
+    ...mapGetters(["user", "tasks", "categories"]),
   },
 };
 </script>
