@@ -3,8 +3,6 @@
     <side-menu-thin
       @toggleMenu="toggleLargeSideMenu"
       @logout="logout"
-      :categories="categories"
-      :tasks="tasks"
     ></side-menu-thin>
     <div
       class="flex-1 p-5 bg-gray-100 pl-16 lg:pl-80 h-screen overflow-y-scroll"
@@ -95,10 +93,10 @@
       <div class="py-5">
         <h2 class="text-5xl text-gray-600">
           <span class="font-extralight">Welcome, </span
-          ><span v-if="user !== {}">{{ user.name }}</span>
+          ><span v-if="user !== null">{{ user.name }}</span>
         </h2>
         <hr class="my-5" />
-        <router-view @updateData="updateData"></router-view>
+        <router-view></router-view>
       </div>
     </div>
   </div>
@@ -109,6 +107,7 @@
 import SideMenuThin from "@/components/SideMenuThin";
 import axios from "axios";
 import router from "../router";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Home",
@@ -118,7 +117,6 @@ export default {
   components: { SideMenuThin },
   data() {
     return {
-      user: {},
       notificationHidden: true,
       userMenuHidden: true,
       task: {
@@ -135,8 +133,6 @@ export default {
         Accept: "application/json",
         Authorization: "Bearer " + localStorage.getItem("myapp_token"),
       },
-      categories: [],
-      tasks: [],
     };
   },
   methods: {
@@ -157,7 +153,8 @@ export default {
           headers: this.headers,
         })
         .then((response) => {
-          this.categories = response.data;
+          // this.categories = response.data;
+          this.$store.dispatch("categories", response.data);
         })
         .catch((error) => console.log(error.response));
     },
@@ -165,7 +162,8 @@ export default {
       axios
         .get(process.env.VUE_APP_API_URL + "tasks", { headers: this.headers })
         .then((response) => {
-          this.tasks = response.data;
+          // this.tasks = response.data;
+          this.$store.dispatch("tasks", response.data);
         })
         .catch((error) => console.log(error.response));
     },
@@ -190,16 +188,20 @@ export default {
         .catch((error) => console.log(error.response.data.message));
     },
   },
-  mounted() {
+  created() {
     axios
       .get(process.env.VUE_APP_API_URL + "user", { headers: this.headers })
       .then((response) => {
-        this.user = response.data;
+        // this.user = response.data;
+        this.$store.dispatch("user", response.data);
       })
       .catch((error) => console.log(error.response));
 
     console.log(process.env.VUE_APP_API_URL);
     this.updateData();
+  },
+  computed: {
+    ...mapGetters(["user", "tasks"]),
   },
   beforeRouteEnter(to, from, next) {
     axios
