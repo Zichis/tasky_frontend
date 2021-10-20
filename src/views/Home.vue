@@ -1,9 +1,6 @@
 <template>
   <div class="min-h-screen flex relative">
-    <side-menu-thin
-      @toggleMenu="toggleLargeSideMenu"
-      @logout="logout"
-    ></side-menu-thin>
+    <side-menu @toggleMenu="toggleLargeSideMenu" @logout="logout"></side-menu>
     <div
       class="flex-1 p-5 bg-gray-100 pl-16 lg:pl-80 h-screen overflow-y-scroll"
     >
@@ -104,7 +101,7 @@
 
 <script>
 // @ is an alias to /src
-import SideMenuThin from "@/components/SideMenuThin";
+import SideMenu from "@/components/SideMenu";
 import axios from "axios";
 import router from "../router";
 import { mapGetters } from "vuex";
@@ -114,7 +111,7 @@ export default {
   metaInfo: {
     title: "Tasky",
   },
-  components: { SideMenuThin },
+  components: { SideMenu },
   data() {
     return {
       notificationHidden: true,
