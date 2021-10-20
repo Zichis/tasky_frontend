@@ -24,7 +24,7 @@
         <label for="category" class="block mb-2">Category</label>
         <v-select
           label="name"
-          :options="categories"
+          :options="categoryNames"
           taggable
           v-model="task.category.name"
         ></v-select>
@@ -105,6 +105,7 @@
 import axios from "axios";
 import router from "../../router";
 import SetAlert from "../../functions/SetAlert";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -115,7 +116,6 @@ export default {
         details: "",
         color: "",
       },
-      categories: [],
       validationErrors: [],
     };
   },
@@ -128,16 +128,18 @@ export default {
             Authorization: "Bearer " + localStorage.getItem("myapp_token"),
           },
         })
-        .then(() => {
+        .then((response) => {
+          console.log(response.data);
           SetAlert("Saved", "You have added a new task!", "success");
-          this.$emit("updateData");
+          this.$store.dispatch("tasks", response.data.tasks);
+          this.$store.dispatch("categories", response.data.categories);
           router.push({ name: "Tasks" });
         })
         .catch((error) => {
           this.validationErrors = error.response.data.errors;
         });
     },
-    getCategories() {
+    /*getCategories() {
       axios
         .get(process.env.VUE_APP_API_URL + "task-categories/names", {
           headers: {
@@ -151,24 +153,26 @@ export default {
         .catch((error) => {
           console.log(error.response);
         });
-    },
+    },*/
     hasHistory() {
       return window.history.length > 2;
     },
   },
-  mounted() {
-    this.getCategories();
-  },
   computed: {
+    ...mapGetters(["categories"]),
     newCategory() {
+      const names = this.categories.map((category) => category.name);
       if (
-        this.categories.includes(this.task.category.name) ||
+        names.includes(this.task.category.name) ||
         this.task.category.name === null
       ) {
         return false;
       }
 
       return true;
+    },
+    categoryNames() {
+      return this.categories.map((category) => category.name);
     },
   },
 };
