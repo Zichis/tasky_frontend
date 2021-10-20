@@ -182,6 +182,8 @@ export default {
         )
         .then((response) => {
           if (response.status === 204) {
+            localStorage.removeItem("myapp_token");
+            this.$store.dispatch("user", null);
             router.push({ name: "Login" });
           }
         })
