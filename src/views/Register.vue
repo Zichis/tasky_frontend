@@ -148,6 +148,7 @@ export default {
         )
         .then((response) => {
           localStorage.setItem("myapp_token", response.data.token);
+          this.$store.dispatch("user", response.data.user);
           router.push("/");
         })
         .catch((error) => {
