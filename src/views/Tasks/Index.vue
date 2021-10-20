@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-if="noTasks"
+      v-if="!hasTasks"
       class="flex justify-center items-center font-light h-60"
     >
       You have no tasks.&nbsp;
@@ -33,7 +33,6 @@ export default {
   components: { TaskCard },
   data() {
     return {
-      noTasks: false,
       headers: {
         Accept: "application/json",
         Authorization: "Bearer " + localStorage.getItem("myapp_token"),
@@ -45,6 +44,9 @@ export default {
   },
   computed: {
     ...mapGetters(["tasks"]),
+    hasTasks() {
+      return this.tasks.length > 0 ? true : false;
+    },
   },
   methods: {
     deleteConfirm(id) {
