@@ -27,12 +27,12 @@ import TaskCard from "@/components/TaskCard";
 import axios from "axios";
 import SetAlert from "../../functions/SetAlert";
 import DisplayAlert from "../../functions/DisplayAlert";
+import { mapGetters } from "vuex";
 
 export default {
   components: { TaskCard },
   data() {
     return {
-      tasks: [],
       noTasks: false,
       headers: {
         Accept: "application/json",
@@ -41,17 +41,10 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get(process.env.VUE_APP_API_URL + "tasks", { headers: this.headers })
-      .then((response) => {
-        this.tasks = response.data;
-        if (this.tasks.length < 1) {
-          this.noTasks = true;
-        }
-      })
-      .catch((error) => console.log(error.response.data.message));
-
     DisplayAlert(this.$swal);
+  },
+  computed: {
+    ...mapGetters(["tasks"]),
   },
   methods: {
     deleteConfirm(id) {
@@ -68,10 +61,10 @@ export default {
               headers: this.headers,
             })
             .then((response) => {
-              this.tasks = response.data;
+              this.$store.dispatch("tasks", response.data.tasks);
+              this.$store.dispatch("categories", response.data.categories);
               SetAlert("Deleted", "Your task has been deleted!", "success");
               DisplayAlert(this.$swal);
-              this.$emit("updateData");
               if (this.tasks.length < 1) {
                 this.noTasks = true;
               }
