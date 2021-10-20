@@ -94,6 +94,7 @@ export default {
         .post(process.env.VUE_APP_API_URL + "login", this.loginForm, headers)
         .then((response) => {
           localStorage.setItem("myapp_token", response.data.token);
+          this.$store.dispatch("user", response.data.user);
           router.push("/");
         })
         .catch(
