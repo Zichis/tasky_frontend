@@ -116,15 +116,6 @@ export default {
     return {
       notificationHidden: true,
       userMenuHidden: true,
-      task: {
-        category: "Management",
-        details: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam et
-        excepturi vitae dolor assumenda, perferendis a modi quod iusto quo
-        repellat repudiandae tenetur commodi dicta doloribus inventore sunt
-        sapiente similique neque at. Maxime aperiam tempora necessitatibus totam
-        molestiae illo quaerat!`,
-        color: "red",
-      },
       isHidden: true,
       headers: {
         Accept: "application/json",
