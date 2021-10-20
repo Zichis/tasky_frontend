@@ -59,6 +59,7 @@
 import axios from "axios";
 import router from "../../router";
 import SetAlert from "../../functions/SetAlert";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -75,26 +76,11 @@ export default {
         details: "",
         color: "",
       },
-      categories: [],
+      //categories: [],
       validationErrors: [],
     };
   },
   methods: {
-    getCategories() {
-      axios
-        .get(process.env.VUE_APP_API_URL + "task-categories", {
-          headers: {
-            Accept: "application/json",
-            Authorization: "Bearer " + localStorage.getItem("myapp_token"),
-          },
-        })
-        .then((response) => {
-          this.categories = response.data;
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
-    },
     editTask() {
       axios
         .put(
@@ -107,7 +93,8 @@ export default {
             },
           }
         )
-        .then(() => {
+        .then((response) => {
+          this.$store.dispatch("tasks", response.data);
           SetAlert("Updated", "Your task has been updated!", "success");
           router.push({ name: "Tasks" });
         })
@@ -120,7 +107,6 @@ export default {
     },
   },
   mounted() {
-    this.getCategories();
     axios
       .get(process.env.VUE_APP_API_URL + `tasks/${this.$route.params.id}`, {
         headers: this.headers,
@@ -133,6 +119,9 @@ export default {
           router.go(-1);
         }
       });
+  },
+  computed: {
+    ...mapGetters(["tasks", "categories"]),
   },
 };
 </script>
