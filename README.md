@@ -8,7 +8,7 @@ A web application to manage your tasks.
 
 - Vue (Frontend)
 - Backend (Laravel) - [Backend repo](https://github.com/Zichis/tasky)
-- Love (:blush:)
+- Love :blush:
 
 ## Details
 
