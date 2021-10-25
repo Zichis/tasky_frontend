@@ -57,11 +57,11 @@
             <div
               class="bg-blue-500 text-white text-xs font-light py-1 px-3 rounded-full"
             >
-              {{ tasks.length }}
+              {{ $store.getters.tasks.length }}
             </div>
           </router-link>
           <a
-            v-for="category in categories"
+            v-for="category in $store.getters.categories"
             :key="category.id"
             href="#"
             class="flex justify-between items-center px-5 mb-7 text-gray-700"
