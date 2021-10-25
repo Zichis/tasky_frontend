@@ -101,6 +101,10 @@ export default {
   background: var(--red-100);
 }
 
+.custom-bg-red-500 {
+  background: var(--red-500);
+}
+
 .custom-border-red-500 {
   border-color: var(--red-500);
 }
@@ -111,6 +115,10 @@ export default {
 
 .custom-bg-blue-100 {
   background: var(--blue-100);
+}
+
+.custom-bg-blue-500 {
+  background: var(--blue-500);
 }
 
 .custom-border-blue-500 {
@@ -125,6 +133,10 @@ export default {
   background: var(--yellow-100);
 }
 
+.custom-bg-yellow-500 {
+  background: var(--yellow-500);
+}
+
 .custom-border-yellow-500 {
   border-color: var(--yellow-500);
 }
@@ -135,6 +147,10 @@ export default {
 
 .custom-bg-green-100 {
   background: var(--green-100);
+}
+
+.custom-bg-green-500 {
+  background: var(--green-500);
 }
 
 .custom-border-green-500 {

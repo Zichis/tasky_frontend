@@ -101,7 +101,7 @@ export default {
       this.$emit("logout");
     },
     badgeColor(color) {
-      return `bg-${color}-500`;
+      return `custom-bg-${color}-500`;
     },
   },
   computed: {
