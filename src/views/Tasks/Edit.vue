@@ -93,7 +93,8 @@ export default {
           }
         )
         .then((response) => {
-          this.$store.dispatch("tasks", response.data);
+          this.$store.dispatch("tasks", response.data.tasks);
+          this.$store.dispatch("categories", response.data.categories);
           SetAlert("Updated", "Your task has been updated!", "success");
           router.push({ name: "Tasks" });
         })
