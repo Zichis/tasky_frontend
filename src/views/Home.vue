@@ -68,7 +68,6 @@ export default {
   components: { SideMenu },
   data() {
     return {
-      notificationHidden: true,
       userMenuHidden: true,
       isHidden: true,
       headers: {
@@ -78,10 +77,6 @@ export default {
     };
   },
   methods: {
-    toggleNotification() {
-      this.userMenuHidden = true;
-      this.notificationHidden = !this.notificationHidden;
-    },
     toggleUserMenu() {
       this.notificationHidden = true;
       this.userMenuHidden = !this.userMenuHidden;
