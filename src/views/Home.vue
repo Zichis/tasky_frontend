@@ -18,54 +18,6 @@
         </div>
         <div class="flex-1 flex justify-end items-center">
           <button
-            id="notificationToggle"
-            @click="toggleNotification($event)"
-            class="relative flex justify-center items-center w-10 h-10 rounded-full bg-gray-200 shadow-md mr-5"
-          >
-            <font-awesome-icon
-              icon="bell"
-              class="text-gray-400"
-            ></font-awesome-icon>
-            <div
-              class="bg-red-400 w-2 h-2 rounded-full absolute top-0 right-0"
-            ></div>
-            <div
-              class="absolute bg-white w-64 z-10 top-12 rounded p-3 shadow-md"
-              :class="{ hidden: notificationHidden }"
-            >
-              <h3>Notifications</h3>
-              <hr class="my-2" />
-              <a
-                href="#"
-                class="block py-2 text-left text-gray-500 hover:text-gray-800"
-                >Create</a
-              >
-              <a
-                href="#"
-                class="block py-2 text-left text-gray-500 hover:text-gray-800"
-                >Update</a
-              >
-              <a
-                href="#"
-                class="block py-2 text-left text-gray-500 hover:text-gray-800"
-                >Delete</a
-              >
-              <a href="#" class="block text-center text-blue-400">More</a>
-            </div>
-          </button>
-          <a
-            href="#"
-            class="relative flex justify-center items-center w-10 h-10 rounded-full bg-gray-200 shadow-md mr-5"
-          >
-            <font-awesome-icon
-              icon="envelope"
-              class="text-gray-400"
-            ></font-awesome-icon>
-            <div
-              class="bg-red-400 w-2 h-2 rounded-full absolute top-0 right-0"
-            ></div>
-          </a>
-          <button
             @click="toggleUserMenu()"
             class="relative flex justify-center items-center w-10 h-10 rounded-full bg-gray-200 shadow-md"
           >
@@ -77,6 +29,8 @@
               class="absolute bg-white w-64 z-10 top-12 right-0 rounded p-3 shadow-md"
               :class="{ hidden: userMenuHidden }"
             >
+              <p class="text-left">{{ user.name }}</p>
+              <hr class="my-2" />
               <a
                 href="#"
                 @click.prevent="logout"
