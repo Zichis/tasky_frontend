@@ -47,13 +47,13 @@ export default {
       return window.history.length > 2;
     },
     categoryTextColor(color) {
-      return `text-${color}-500`;
+      return `custom-text-${color}-500`;
     },
     categoryBgColor(color) {
-      return `bg-${color}-100`;
+      return `custom-bg-${color}-100`;
     },
     categoryBorderColor(color) {
-      return `border-${color}-500`;
+      return `custom-border-${color}-500`;
     },
   },
   mounted() {
