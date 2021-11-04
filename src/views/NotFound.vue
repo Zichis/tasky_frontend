@@ -18,7 +18,7 @@ import router from "../router";
 
 export default {
   metaInfo: {
-    title: "Tasky | Not Found",
+    title: "UnTasky | Not Found",
   },
   methods: {
     goBack() {

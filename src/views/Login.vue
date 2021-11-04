@@ -9,7 +9,7 @@
         </h2>
         <h3 class="font-semibold mb-2">Log into your account</h3>
         <p class="font-light">
-          Welcome back to Tasky. Enter your account details to continue from
+          Welcome back to UnTasky. Enter your account details to continue from
           where you stopped.
         </p>
       </header>
@@ -68,7 +68,7 @@ import router from "../router";
 
 export default {
   metaInfo: {
-    title: "Tasky | Login",
+    title: "UnTasky | Login",
   },
   data() {
     return {

@@ -110,7 +110,7 @@ import router from "../router";
 
 export default {
   metaInfo: {
-    title: "Tasky | Sign Up",
+    title: "UnTasky | Sign Up",
   },
   data() {
     return {

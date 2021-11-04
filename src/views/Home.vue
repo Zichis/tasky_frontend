@@ -63,7 +63,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "Home",
   metaInfo: {
-    title: "Tasky",
+    title: "UnTasky",
   },
   components: { SideMenu },
   data() {

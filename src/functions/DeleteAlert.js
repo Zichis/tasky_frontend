@@ -1,5 +1,5 @@
 export default function() {
-  localStorage.removeItem("tasky_alert_action");
-  localStorage.removeItem("tasky_alert_message");
-  localStorage.removeItem("tasky_alert_status");
+  localStorage.removeItem("untasky_alert_action");
+  localStorage.removeItem("untasky_alert_message");
+  localStorage.removeItem("untasky_alert_status");
 }
