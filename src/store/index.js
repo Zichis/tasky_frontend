@@ -7,6 +7,7 @@ const state = {
   user: {},
   tasks: [],
   categories: [],
+  statuses: [],
 };
 
 export default new Vuex.Store({
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     categories(state, categories) {
       state.categories = categories;
     },
+    statuses(state, statuses) {
+      state.statuses = statuses;
+    },
   },
   actions: {
     user(context, user) {
@@ -31,6 +35,9 @@ export default new Vuex.Store({
     },
     categories(context, categories) {
       context.commit("categories", categories);
+    },
+    statuses(context, statuses) {
+      context.commit("statuses", statuses);
     },
   },
   modules: {},
@@ -43,6 +50,9 @@ export default new Vuex.Store({
     },
     categories: (state) => {
       return state.categories;
+    },
+    statuses: (state) => {
+      return state.statuses;
     },
   },
 });
