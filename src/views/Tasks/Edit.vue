@@ -35,6 +35,14 @@
         </p>
       </div>
       <div class="mb-5">
+        <label for="category" class="block mb-2">Status</label>
+        <v-select
+          label="name"
+          :options="statuses"
+          v-model="task.status"
+        ></v-select>
+      </div>
+      <div class="mb-5">
         <label for="details" class="block mb-2">Details</label>
         <textarea
           class="px-2 py-1 w-full border-2 border-gray-300 rounded focus:outline-none focus:border-gray-400 resize-none"
@@ -75,6 +83,7 @@ export default {
         },
         details: "",
         color: "",
+        status: "",
       },
       validationErrors: [],
     };
@@ -121,7 +130,7 @@ export default {
       });
   },
   computed: {
-    ...mapGetters(["tasks", "categories"]),
+    ...mapGetters(["tasks", "categories", "statuses"]),
   },
 };
 </script>
