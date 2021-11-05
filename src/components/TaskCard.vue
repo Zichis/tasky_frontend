@@ -16,6 +16,12 @@
         </h3>
         <div>
           <router-link
+            :to="{ name: 'ShowTask', params: { id: task.id } }"
+            class="text-gray-400 hover:text-blue-400 mr-2"
+          >
+            <font-awesome-icon icon="eye"></font-awesome-icon>
+          </router-link>
+          <router-link
             :to="{ name: 'EditTask', params: { id: task.id } }"
             class="text-gray-400 hover:text-blue-400 mr-2"
           >
@@ -32,26 +38,9 @@
       <p class="my-2 text-gray-500 h-12 overflow-hidden">
         {{ task.title | brief }}
       </p>
-      <div class="flex justify-between w-full bottom-0 py-3 text-gray-400">
-        <div>
-          <font-awesome-icon
-            icon="comment-alt"
-            class="text-gray-400"
-          ></font-awesome-icon>
-          4&nbsp;&nbsp;
-          <font-awesome-icon
-            icon="paperclip"
-            class="text-gray-400"
-          ></font-awesome-icon>
-          2&nbsp;
-          <router-link
-            :to="{ name: 'ShowTask', params: { id: task.id } }"
-            class="my-1 hover:text-gray-700"
-            >View</router-link
-          >
-        </div>
+      <div class="w-full text-right mx-auto bottom-0 py-3 text-gray-400">
         <div
-          class="text-white text-xs font-light rounded px-2 py-1"
+          class="inline-block text-white text-xs font-light rounded px-2 py-1"
           :style="{ background: statusColor(task.status.name) }"
         >
           {{ task.status.name }}
