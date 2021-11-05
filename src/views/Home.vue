@@ -135,6 +135,15 @@ export default {
 
     console.log(process.env.VUE_APP_API_URL);
     this.updateData();
+
+    axios
+      .get(process.env.VUE_APP_API_URL + "task-statuses", {
+        headers: this.headers,
+      })
+      .then((response) => {
+        this.$store.dispatch("statuses", response.data);
+      })
+      .catch((error) => console.log(error.response));
   },
   computed: {
     ...mapGetters(["user", "tasks"]),
