@@ -1,5 +1,6 @@
 <template>
   <div>
+    <views-links></views-links>
     <div
       v-if="!hasTasks"
       class="flex justify-center items-center font-light h-60"
@@ -24,13 +25,14 @@
 
 <script>
 import TaskCard from "@/components/TaskCard";
+import ViewsLinks from "@/components/ViewsLinks";
 import axios from "axios";
 import SetAlert from "../../functions/SetAlert";
 import DisplayAlert from "../../functions/DisplayAlert";
 import { mapGetters } from "vuex";
 
 export default {
-  components: { TaskCard },
+  components: { TaskCard, ViewsLinks },
   data() {
     return {
       headers: {
