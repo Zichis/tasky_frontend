@@ -10,7 +10,7 @@
         <h3 class="font-semibold mb-2">Log into your account</h3>
         <p class="font-light">
           Welcome back to UnTasky. Enter your account details to continue from
-          where you stopped.
+          where you stopped. HACKED!!!
         </p>
       </header>
       <form @submit.prevent="login" class="w-full">
