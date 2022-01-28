@@ -102,9 +102,21 @@ export default {
         })
         .catch((error) => console.log(error.response));
     },
+    getPriorities() {
+      axios
+        .get(process.env.VUE_APP_API_URL + "task-priorities", {
+          headers: this.headers,
+        })
+        .then((response) => {
+          console.log(response);
+          this.$store.dispatch("priorities", response.data);
+        })
+        .catch((error) => console.log(error.response));
+    },
     updateData() {
       this.getCategories();
       this.getTasks();
+      this.getPriorities();
     },
     logout() {
       axios

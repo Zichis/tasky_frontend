@@ -81,6 +81,14 @@
         </div>
       </div>
       <div class="mb-5">
+        <label for="priority" class="block mb-2">Priority</label>
+        <v-select
+          label="name"
+          :options="priorities"
+          v-model="task.priority"
+        ></v-select>
+      </div>
+      <div class="mb-5">
         <label for="category" class="block mb-2">Status</label>
         <v-select
           label="name"
@@ -142,6 +150,7 @@ export default {
           SetAlert("Saved", "You have added a new task!", "success");
           this.$store.dispatch("tasks", response.data.tasks);
           this.$store.dispatch("categories", response.data.categories);
+          this.$store.dispatch("priorities", response.data.priorities);
           router.push({ name: "Tasks" });
         })
         .catch((error) => {
@@ -168,7 +177,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["categories", "statuses"]),
+    ...mapGetters(["categories", "statuses", "priorities"]),
     newCategory() {
       const names = this.categories.map((category) => category.name);
       if (
