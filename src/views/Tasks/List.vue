@@ -22,7 +22,7 @@
                     <div class="font-semibold text-left">Title</div>
                   </th>
                   <th class="p-2 whitespace-nowrap">
-                    <div class="font-semibold text-left">Category</div>
+                    <div class="font-semibold text-left">Priority</div>
                   </th>
                   <th class="p-2 whitespace-nowrap">
                     <div class="font-semibold text-center">Status</div>
@@ -57,11 +57,8 @@
                   </td>
                   <td class="p-2 whitespace-nowrap">
                     <div class="text-left font-medium text-green-500">
-                      <h3
-                        class="inline-block text-sm"
-                        :class="[categoryTextColor(task.task_category.color)]"
-                      >
-                        {{ task.task_category.name }}
+                      <h3 class="inline-block text-sm">
+                        {{ task.priority.name }}
                       </h3>
                     </div>
                   </td>
@@ -107,12 +104,6 @@ export default {
   methods: {
     borderColor(color) {
       return `custom-border-${color}-500`;
-    },
-    categoryBgColor(color) {
-      return `custom-bg-${color}-100`;
-    },
-    categoryTextColor(color) {
-      return `custom-text-${color}-500`;
     },
     deleteConfirm(id) {
       this.$emit("deleteConfirm", id);

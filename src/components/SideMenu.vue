@@ -60,20 +60,6 @@
               {{ $store.getters.tasks.length }}
             </div>
           </router-link>
-          <a
-            v-for="category in $store.getters.categories"
-            :key="category.id"
-            href="#"
-            class="flex justify-between items-center px-5 mb-7 text-gray-700"
-          >
-            <h4>{{ category.name }}</h4>
-            <div
-              class="text-white text-xs font-light py-1 px-3 rounded-full"
-              :class="badgeColor(category.color)"
-            >
-              {{ category.tasks.length }}
-            </div>
-          </a>
         </div>
       </div>
     </div>
@@ -108,7 +94,7 @@ export default {
     sidemenuWidth() {
       return this.sidemenuOpen ? "w-80 lg:w-72" : "w-14 lg:w-72";
     },
-    ...mapGetters(["user", "tasks", "categories"]),
+    ...mapGetters(["user", "tasks"]),
   },
 };
 </script>

@@ -21,21 +21,7 @@
         </p>
       </div>
       <div class="mb-5">
-        <label for="category" class="block mb-2">Category</label>
-        <v-select
-          label="name"
-          :options="categories"
-          v-model="task.task_category"
-        ></v-select>
-        <p
-          v-if="validationErrors.category"
-          class="my-1 text-red-400 font-light"
-        >
-          {{ validationErrors.category[0] }}
-        </p>
-      </div>
-      <div class="mb-5">
-        <label for="category" class="block mb-2">Status</label>
+        <label for="status" class="block mb-2">Status</label>
         <v-select
           label="name"
           :options="statuses"
@@ -78,9 +64,6 @@ export default {
       },
       task: {
         title: "",
-        task_category: {
-          name: "",
-        },
         details: "",
         color: "",
         status: "",
@@ -103,7 +86,6 @@ export default {
         )
         .then((response) => {
           this.$store.dispatch("tasks", response.data.tasks);
-          this.$store.dispatch("categories", response.data.categories);
           SetAlert("Updated", "Your task has been updated!", "success");
           router.push({ name: "Tasks" });
         })
@@ -130,7 +112,7 @@ export default {
       });
   },
   computed: {
-    ...mapGetters(["tasks", "categories", "statuses"]),
+    ...mapGetters(["tasks", "statuses"]),
   },
 };
 </script>

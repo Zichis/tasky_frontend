@@ -66,7 +66,6 @@ export default {
             })
             .then((response) => {
               this.$store.dispatch("tasks", response.data.tasks);
-              this.$store.dispatch("categories", response.data.categories);
               SetAlert("Deleted", "Your task has been deleted!", "success");
               DisplayAlert(this.$swal);
               if (this.tasks.length < 1) {

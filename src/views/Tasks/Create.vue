@@ -21,66 +21,6 @@
         </p>
       </div>
       <div class="mb-5">
-        <label for="category" class="block mb-2">Category</label>
-        <v-select
-          label="name"
-          :options="categoryNames"
-          taggable
-          v-model="task.category.name"
-        ></v-select>
-        <p
-          v-if="validationErrors.category"
-          class="my-1 text-red-400 font-light"
-        >
-          {{ validationErrors.category[0] }}
-        </p>
-        <div class="my-3" v-if="newCategory">
-          <label for="color" class="block mt-5 mb-2">Select Color</label>
-          <div class="flex flex-wrap">
-            <div class="mr-4">
-              <input
-                class="mr-1"
-                type="radio"
-                value="red"
-                id="red"
-                v-model="task.color"
-              />
-              <label for="red">Red</label>
-            </div>
-            <div class="mr-4">
-              <input
-                class="mr-1"
-                type="radio"
-                value="blue"
-                id="blue"
-                v-model="task.color"
-              />
-              <label for="blue">Blue</label>
-            </div>
-            <div class="mr-4">
-              <input
-                class="mr-1"
-                type="radio"
-                value="green"
-                id="green"
-                v-model="task.color"
-              />
-              <label for="green">Green</label>
-            </div>
-            <div class="mr-4">
-              <input
-                class="mr-1"
-                type="radio"
-                value="yellow"
-                id="yellow"
-                v-model="task.color"
-              />
-              <label for="yellow">Yellow</label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="mb-5">
         <label for="priority" class="block mb-2">Priority</label>
         <v-select
           label="name"
@@ -89,7 +29,7 @@
         ></v-select>
       </div>
       <div class="mb-5">
-        <label for="category" class="block mb-2">Status</label>
+        <label for="status" class="block mb-2">Status</label>
         <v-select
           label="name"
           :options="statuses"
@@ -128,7 +68,6 @@ export default {
     return {
       task: {
         title: "",
-        category: { name: null },
         details: "",
         color: "",
         status: "",
@@ -149,7 +88,6 @@ export default {
           console.log(response.data);
           SetAlert("Saved", "You have added a new task!", "success");
           this.$store.dispatch("tasks", response.data.tasks);
-          this.$store.dispatch("categories", response.data.categories);
           this.$store.dispatch("priorities", response.data.priorities);
           router.push({ name: "Tasks" });
         })
@@ -157,41 +95,12 @@ export default {
           this.validationErrors = error.response.data.errors;
         });
     },
-    /*getCategories() {
-      axios
-        .get(process.env.VUE_APP_API_URL + "task-categories/names", {
-          headers: {
-            Accept: "application/json",
-            Authorization: "Bearer " + localStorage.getItem("myapp_token"),
-          },
-        })
-        .then((response) => {
-          this.categories = response.data;
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
-    },*/
     hasHistory() {
       return window.history.length > 2;
     },
   },
   computed: {
-    ...mapGetters(["categories", "statuses", "priorities"]),
-    newCategory() {
-      const names = this.categories.map((category) => category.name);
-      if (
-        names.includes(this.task.category.name) ||
-        this.task.category.name === null
-      ) {
-        return false;
-      }
-
-      return true;
-    },
-    categoryNames() {
-      return this.categories.map((category) => category.name);
-    },
+    ...mapGetters(["statuses", "priorities"]),
   },
 };
 </script>

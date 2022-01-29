@@ -84,16 +84,6 @@ export default {
     toggleLargeSideMenu() {
       this.isHidden = !this.isHidden;
     },
-    getCategories() {
-      axios
-        .get(process.env.VUE_APP_API_URL + "task-categories", {
-          headers: this.headers,
-        })
-        .then((response) => {
-          this.$store.dispatch("categories", response.data);
-        })
-        .catch((error) => console.log(error.response));
-    },
     getTasks() {
       axios
         .get(process.env.VUE_APP_API_URL + "tasks", { headers: this.headers })
@@ -114,7 +104,6 @@ export default {
         .catch((error) => console.log(error.response));
     },
     updateData() {
-      this.getCategories();
       this.getTasks();
       this.getPriorities();
     },

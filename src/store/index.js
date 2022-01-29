@@ -6,7 +6,6 @@ Vue.use(Vuex);
 const state = {
   user: {},
   tasks: [],
-  categories: [],
   statuses: [],
   priorities: [],
 };
@@ -19,9 +18,6 @@ export default new Vuex.Store({
     },
     tasks(state, tasks) {
       state.tasks = tasks;
-    },
-    categories(state, categories) {
-      state.categories = categories;
     },
     statuses(state, statuses) {
       state.statuses = statuses;
@@ -37,9 +33,6 @@ export default new Vuex.Store({
     tasks(context, tasks) {
       context.commit("tasks", tasks);
     },
-    categories(context, categories) {
-      context.commit("categories", categories);
-    },
     statuses(context, statuses) {
       context.commit("statuses", statuses);
     },
@@ -54,9 +47,6 @@ export default new Vuex.Store({
     },
     tasks: (state) => {
       return state.tasks;
-    },
-    categories: (state) => {
-      return state.categories;
     },
     statuses: (state) => {
       return state.statuses;

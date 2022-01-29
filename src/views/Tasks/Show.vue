@@ -7,16 +7,6 @@
       <font-awesome-icon icon="chevron-left" /> Go back
     </button>
     <h1 class="text-3xl mb-1">{{ task.title }}</h1>
-    <div
-      class="inline-block px-3 rounded border"
-      :class="[
-        categoryTextColor(task.task_category.color),
-        categoryBgColor(task.task_category.color),
-        categoryBorderColor(task.task_category.color),
-      ]"
-    >
-      {{ task.task_category.name }}
-    </div>
     <p class="my-4 font-light">{{ task.details }}</p>
   </div>
 </template>
@@ -30,9 +20,6 @@ export default {
     return {
       task: {
         title: "",
-        task_category: {
-          name: "",
-        },
         details: "",
         color: "",
       },
@@ -45,15 +32,6 @@ export default {
   methods: {
     hasHistory() {
       return window.history.length > 2;
-    },
-    categoryTextColor(color) {
-      return `custom-text-${color}-500`;
-    },
-    categoryBgColor(color) {
-      return `custom-bg-${color}-100`;
-    },
-    categoryBorderColor(color) {
-      return `custom-border-${color}-500`;
     },
   },
   mounted() {

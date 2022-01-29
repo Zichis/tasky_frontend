@@ -1,19 +1,7 @@
 <template>
   <div class="w-full md:w-1/2 lg:w-1/3 p-2 md:p-5">
-    <div
-      class="relative bg-white p-3 h-44 rounded border-t-4"
-      :class="borderColor(task.task_category.color)"
-    >
+    <div class="relative bg-white p-3 h-44 rounded border-t-4">
       <div class="flex justify-between items-center">
-        <h3
-          class="p-2 rounded inline-block text-sm"
-          :class="[
-            categoryTextColor(task.task_category.color),
-            categoryBgColor(task.task_category.color),
-          ]"
-        >
-          {{ task.task_category.name }}
-        </h3>
         <div>
           <router-link
             :to="{ name: 'ShowTask', params: { id: task.id } }"
@@ -68,12 +56,6 @@ export default {
   methods: {
     borderColor(color) {
       return `custom-border-${color}-500`;
-    },
-    categoryBgColor(color) {
-      return `custom-bg-${color}-100`;
-    },
-    categoryTextColor(color) {
-      return `custom-text-${color}-500`;
     },
     deleteConfirm(id) {
       this.$emit("deleteConfirm", id);
