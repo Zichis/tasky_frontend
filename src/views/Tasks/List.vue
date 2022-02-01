@@ -57,7 +57,10 @@
                   </td>
                   <td class="p-2 whitespace-nowrap">
                     <div class="text-left font-medium text-green-500">
-                      <h3 class="inline-block text-sm">
+                      <h3
+                        class="inline-block text-sm"
+                        :style="{ color: task.priority.color }"
+                      >
                         {{ task.priority.name }}
                       </h3>
                     </div>
