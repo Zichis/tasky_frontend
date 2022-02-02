@@ -3,13 +3,21 @@
     class="flex-1 bg-gray-50 flex justify-center items-center px-5 md:px-10 h-screen"
   >
     <div class="w-full">
-      <header class="px-5 text-gray-700 mb-8">
+      <header class="px-5 text-gray-700 mb-5">
         <h2 class="text-2xl font-semibold mb-10">
           Register
         </h2>
         <h3 class="font-semibold mb-2">Manage all your tasks efficiently</h3>
         <p class="font-light">
           Let's get you all started by setting up your account.
+        </p>
+        <p class="font-light">
+          You can create an Organization account
+          <router-link
+            :to="{ name: 'OrganizationRegister' }"
+            class="font-normal text-green-400 hover:text-green-500"
+            >here</router-link
+          >.
         </p>
       </header>
       <form @submit.prevent="register" class="w-full">
