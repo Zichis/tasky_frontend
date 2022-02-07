@@ -60,6 +60,12 @@
               {{ $store.getters.tasks.length }}
             </div>
           </router-link>
+          <div class="px-5">
+            <h3 class="text-gray-500 text-sm">My Organizations</h3>
+            <p v-for="organization in myOrganizations" :key="organization.id">
+              {{ organization.name }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -94,7 +100,7 @@ export default {
     sidemenuWidth() {
       return this.sidemenuOpen ? "w-80 lg:w-72" : "w-14 lg:w-72";
     },
-    ...mapGetters(["user", "tasks"]),
+    ...mapGetters(["user", "tasks", "myOrganizations"]),
   },
 };
 </script>
