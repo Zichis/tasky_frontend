@@ -21,6 +21,14 @@
         </p>
       </div>
       <div class="mb-5">
+        <label for="priority" class="block mb-2">Priority</label>
+        <v-select
+          label="name"
+          :options="priorities"
+          v-model="task.priority"
+        ></v-select>
+      </div>
+      <div class="mb-5">
         <label for="status" class="block mb-2">Status</label>
         <v-select
           label="name"
@@ -112,7 +120,7 @@ export default {
       });
   },
   computed: {
-    ...mapGetters(["tasks", "statuses"]),
+    ...mapGetters(["tasks", "statuses", "priorities"]),
   },
 };
 </script>
