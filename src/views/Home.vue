@@ -103,9 +103,21 @@ export default {
         })
         .catch((error) => console.log(error.response));
     },
+    getMyOrganizations() {
+      axios
+        .get(process.env.VUE_APP_API_URL + "my-organizations", {
+          headers: this.headers,
+        })
+        .then((response) => {
+          console.log(response);
+          this.$store.dispatch("myOrganizations", response.data);
+        })
+        .catch((error) => console.log(error.response));
+    },
     updateData() {
       this.getTasks();
       this.getPriorities();
+      this.getMyOrganizations();
     },
     logout() {
       axios
@@ -147,7 +159,7 @@ export default {
       .catch((error) => console.log(error.response));
   },
   computed: {
-    ...mapGetters(["user", "tasks"]),
+    ...mapGetters(["user", "tasks", "myOrganizations"]),
   },
   beforeRouteEnter(to, from, next) {
     axios

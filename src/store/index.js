@@ -8,6 +8,7 @@ const state = {
   tasks: [],
   statuses: [],
   priorities: [],
+  myOrganizations: [],
 };
 
 export default new Vuex.Store({
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     priorities(state, priorities) {
       state.priorities = priorities;
     },
+    myOrganizations(state, myOrganizations) {
+      state.myOrganizations = myOrganizations;
+    },
   },
   actions: {
     user(context, user) {
@@ -38,6 +42,9 @@ export default new Vuex.Store({
     },
     priorities(context, priorities) {
       context.commit("priorities", priorities);
+    },
+    myOrganizations(context, myOrganizations) {
+      context.commit("myOrganizations", myOrganizations);
     },
   },
   modules: {},
@@ -53,6 +60,9 @@ export default new Vuex.Store({
     },
     priorities: (state) => {
       return state.priorities;
+    },
+    myOrganizations: (state) => {
+      return state.myOrganizations;
     },
   },
 });
