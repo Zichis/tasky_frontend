@@ -63,8 +63,9 @@
 </template>
 
 <script>
-import axios from "axios";
 import router from "../router";
+import AuthService from "../services/AuthService";
+import UserService from "../services/UserService";
 
 export default {
   metaInfo: {
@@ -87,11 +88,7 @@ export default {
         return;
       }
 
-      let headers = {
-        Accept: "application/json",
-      };
-      axios
-        .post(process.env.VUE_APP_API_URL + "login", this.loginForm, headers)
+      AuthService.login(this.loginForm)
         .then((response) => {
           localStorage.setItem("myapp_token", response.data.token);
           this.$store.dispatch("user", response.data.user);
@@ -103,13 +100,7 @@ export default {
     },
   },
   beforeRouteEnter(to, from, next) {
-    axios
-      .get(process.env.VUE_APP_API_URL + "user", {
-        headers: {
-          Accept: "application/json",
-          Authorization: "Bearer " + localStorage.getItem("myapp_token"),
-        },
-      })
+    UserService.getCurrentUser()
       .then(() => {
         next("/");
       })
