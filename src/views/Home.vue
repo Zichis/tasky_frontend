@@ -56,9 +56,14 @@
 <script>
 // @ is an alias to /src
 import SideMenu from "@/components/SideMenu";
-import axios from "axios";
 import router from "../router";
 import { mapGetters } from "vuex";
+import AuthService from "../services/AuthService";
+import MyOrganizationsService from "../services/MyOrganizationsService";
+import TaskService from "../services/TaskService";
+import TaskStatusService from "../services/TaskStatusService";
+import TaskPriorityService from "../services/TaskPriorityService";
+import UserService from "../services/UserService";
 
 export default {
   name: "Home",
@@ -85,18 +90,14 @@ export default {
       this.isHidden = !this.isHidden;
     },
     getTasks() {
-      axios
-        .get(process.env.VUE_APP_API_URL + "tasks", { headers: this.headers })
+      TaskService.getTasks()
         .then((response) => {
           this.$store.dispatch("tasks", response.data);
         })
         .catch((error) => console.log(error.response));
     },
     getPriorities() {
-      axios
-        .get(process.env.VUE_APP_API_URL + "task-priorities", {
-          headers: this.headers,
-        })
+      TaskPriorityService.getTaskPriorities()
         .then((response) => {
           console.log(response);
           this.$store.dispatch("priorities", response.data);
@@ -104,10 +105,7 @@ export default {
         .catch((error) => console.log(error.response));
     },
     getMyOrganizations() {
-      axios
-        .get(process.env.VUE_APP_API_URL + "my-organizations", {
-          headers: this.headers,
-        })
+      MyOrganizationsService.getMyOrganizations()
         .then((response) => {
           console.log(response);
           this.$store.dispatch("myOrganizations", response.data);
@@ -120,14 +118,7 @@ export default {
       this.getMyOrganizations();
     },
     logout() {
-      axios
-        .post(
-          process.env.VUE_APP_API_URL + "logout",
-          {},
-          {
-            headers: this.headers,
-          }
-        )
+      AuthService.logout()
         .then((response) => {
           if (response.status === 204) {
             localStorage.removeItem("myapp_token");
@@ -139,8 +130,7 @@ export default {
     },
   },
   created() {
-    axios
-      .get(process.env.VUE_APP_API_URL + "user", { headers: this.headers })
+    UserService.getCurrentUser()
       .then((response) => {
         this.$store.dispatch("user", response.data);
       })
@@ -149,10 +139,7 @@ export default {
     console.log(process.env.VUE_APP_API_URL);
     this.updateData();
 
-    axios
-      .get(process.env.VUE_APP_API_URL + "task-statuses", {
-        headers: this.headers,
-      })
+    TaskStatusService.getTaskStatuses()
       .then((response) => {
         this.$store.dispatch("statuses", response.data);
       })
@@ -162,13 +149,7 @@ export default {
     ...mapGetters(["user", "tasks", "myOrganizations"]),
   },
   beforeRouteEnter(to, from, next) {
-    axios
-      .get(process.env.VUE_APP_API_URL + "user", {
-        headers: {
-          Accept: "application/json",
-          Authorization: "Bearer " + localStorage.getItem("myapp_token"),
-        },
-      })
+    UserService.getCurrentUser()
       .then(() => {
         next();
       })
