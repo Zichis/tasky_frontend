@@ -1,4 +1,9 @@
 import axios from "axios";
 
-axios.defaults.headers.common["Authorization"] =
-  "Bearer " + localStorage.getItem("myapp_token");
+export const httpClient = axios.create({
+  baseURL: process.env.VUE_APP_API_URL,
+  withCredentials: false,
+  headers: {
+    Accept: "application/json",
+  },
+});
